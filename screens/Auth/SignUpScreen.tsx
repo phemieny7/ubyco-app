@@ -22,8 +22,6 @@ const SignUpScreen = ({navigation}) => {
         return clearError;
       }, [navigation]);
 
-    console.log(state)
-
     const passwordVisibility = () => {
         setShowPassword(showPassword ? false : true)
     }

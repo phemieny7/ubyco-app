@@ -112,5 +112,3 @@ function VerifyNavigator() {
     </AuthStack.Navigator>
   );
 }
-
- 

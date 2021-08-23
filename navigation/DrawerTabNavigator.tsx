@@ -232,5 +232,3 @@ import ProfileScreen from '../screens/ProfileScreen'
       </HomeStack.Navigator>
     );
   }
-
- 

@@ -7,6 +7,7 @@ import ListItem from '../components/ListItem'
 import Header from '../components/theme/Header'
 import Card from '../components/card/Card'
 import SkeletonPlaceholder from "react-native-skeleton-placeholder";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { Context as Home } from '../context/HomeContext'
 
@@ -47,7 +48,7 @@ const Loading = () => {
   );
 };
 
-const  HomeScreen = () =>{
+const  HomeScreen = ({navigation}) =>{
   const [user, setUser] = React.useState({});
   const [card, setCard] = React.useState([])
   const {state, getUser, getCard} = React.useContext(Home);
@@ -56,19 +57,17 @@ const  HomeScreen = () =>{
 
 
   const fetchUser = async() => {
-    let res = await getUser()
+    let res = await getUser()  
 }
   const fetchCard = async() => {
     let res = await getCard()
   }
 
   React.useEffect(() => {
-   fetchUser()
+    fetchUser()
+    fetchCard()
   },[]);
 
-  React.useEffect(() => {
-    fetchCard()
-   },[]);
 
    return (
     <SafeAreaView style={{backgroundColor:'#f9e8ef', flex: 1}} >
@@ -83,7 +82,7 @@ const  HomeScreen = () =>{
 
           {/* customer Card */}
         <View style={{ alignSelf:'center', padding:10}}>
-          <Card id={state.user.customer_id} amount={state.user.userAmount != null ? state.user.userAmount.amount : 'pending' }/>
+          <Card id={state.user.customer_id} amount={state.user.userAmount != null ? state.user.userAmount.amount : '0' }/>
         </View>
         <View style={{flex: 1, borderTopEndRadius:50, borderTopLeftRadius:50, height: '100%'}}>
           {/* Action starts here */}

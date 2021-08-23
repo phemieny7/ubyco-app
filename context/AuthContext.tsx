@@ -38,7 +38,6 @@ const login = (dispatch: (arg0: { type: string; payload: any; }) => void) => asy
         catch (err) {
             const message = err.response.data
             const network = err.response.status
-            console.log(err.response)
             if (Object.keys(message).length <= 0 || undefined) {
                 dispatch({ type: 'add_error', payload: 'Invalid user details' })
             } else if (network == 400 && Object.keys(message).length > 0) {
@@ -68,7 +67,6 @@ const signup = (dispatch: (arg0: { type: string; payload: string | {}; }) => voi
             callback();
         } catch (err) {
             const message = err.response.data
-            console.log(message)
             const network = err.response.status
             if (Object.keys(message).length <= 0) {
                 dispatch({ type: 'add_error', payload: 'User already exist' })
@@ -93,7 +91,6 @@ const signup = (dispatch: (arg0: { type: string; payload: string | {}; }) => voi
 const verify = (dispatch: (arg0: { type: string; payload: any; }) => void) => async (token: any, callback: () => void) => {
         try {
             const response = await Server.put('/verify', { verification_code: token });
-            console.log(response)
             await AsyncStorage.setItem('token', response.data.message.token)
             dispatch({ type: 'login', payload: response.data.message.token })
             callback();

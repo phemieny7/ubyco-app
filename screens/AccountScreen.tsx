@@ -89,7 +89,8 @@ export default function AccountScreen({navigation}) {
             setAccountNumber(null)
             setCode(null)
             setLoading(false)
-            alert(data)
+            alert('Account added succesfully')
+            getBanks()
         })
     }
 
