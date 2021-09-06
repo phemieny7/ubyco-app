@@ -31,7 +31,6 @@
     "web": {
       "favicon": "./assets/images/favicon.png"
     },
-    "description": "",
-    "githubUrl": "https://github.com/phemieny7/ubyco-app"
+    "description": "A crypto and giftcard trading app."
   }
 }
