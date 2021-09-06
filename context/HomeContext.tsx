@@ -1,7 +1,7 @@
 import createDataContext from "./createDataContext";
 import Server from "../api/Server";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-const Url = "http://871e8cc225b2.ngrok.io";
+const Url = "http://ffd0-105-112-63-114.ngrok.io";
 
 const homeReducer = (state: any, action: { type: any; payload: any }) => {
   switch (action.type) {
