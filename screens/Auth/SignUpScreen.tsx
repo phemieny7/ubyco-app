@@ -171,10 +171,6 @@ const SignUpScreen = ({navigation}) => {
                         titleStyle={{ color: '#f63757' }}
                         onPress={() => navigation.navigate('Verify')}
                     />
-
-
-
-
                 </KeyboardAwareScrollView>
 
 

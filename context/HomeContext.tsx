@@ -1,7 +1,7 @@
 import createDataContext from "./createDataContext";
 import Server from "../api/Server";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-const Url = "https://1022-105-112-39-139.ngrok.io";
+const Url = "https://ubycohub-server.herokuapp.com";
 
 const homeReducer = (state: any, action: { type: any; payload: any }) => {
   switch (action.type) {
@@ -26,6 +26,7 @@ const getUser = (dispatch: (arg0: { type: string; payload: any }) => void) => {
   return async (callback: (arg0: any) => void) => {
     try {
       const response = await Server.get("/user");
+      console.log(response)
       dispatch({ type: "get_user", payload: response.data.message });
     } catch (err) {
       dispatch({ type: "add_error", payload: "Network error" });

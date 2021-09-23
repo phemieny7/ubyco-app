@@ -13,7 +13,6 @@ const CryptoRate = () => {
     const [amount, setAmount] = React.useState(null);
     const [rate, setRate] = React.useState(null);
     const [loading, setLoading] = React.useState(false);
-
     const {coinType} = React.useContext(Home);
 
    

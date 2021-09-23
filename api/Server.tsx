@@ -2,7 +2,7 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Server = axios.create({
-    baseURL: "https://1022-105-112-39-139.ngrok.io" 
+    baseURL: "https://ubycohub-server.herokuapp.com" 
 })
 
 

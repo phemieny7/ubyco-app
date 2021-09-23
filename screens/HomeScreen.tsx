@@ -84,6 +84,7 @@ const  HomeScreen = ({navigation}) =>{
         <View style={{ alignSelf:'center', padding:10}}>
           <Card id={state.user.customer_id} amount={state.user.userAmount != null ? state.user.userAmount.amount : '0' }/>
         </View>
+
         <View style={{flex: 1, borderTopEndRadius:50, borderTopLeftRadius:50, height: '100%'}}>
           {/* Action starts here */}
           <View style={{ padding: 10}}>
@@ -102,7 +103,7 @@ const  HomeScreen = ({navigation}) =>{
                   name='cards'
                   type='material-community'
                   color='#f63757'
-                  onPress={()=>{console.log('working')}}
+                  onPress={()=>{navigation.navigate('GiftcardHistroy')}}
                 />
                 <Element.Text>
                   Gift Cards

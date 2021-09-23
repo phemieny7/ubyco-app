@@ -29,7 +29,6 @@ const VerifyScreen = () => {
         }
     }
 
-
     const doVerify = async () => {
         state.errorMessage = ''
         setLoading(true)

@@ -3,9 +3,6 @@ import { StyleSheet, SafeAreaView, Dimensions, Platform } from 'react-native';
 import { Text, View, FlatList, Image } from 'react-native';
 import * as Element from 'react-native-elements'
 import Picker from '../components/Picker'
-import { MaterialCommunityIcons } from '@expo/vector-icons'
-import Title from '../components/theme/Title'
-import Header from '../components/theme/Header'
 import RandomInput from '../components/RandomInput';
 import Button from '../components/Button'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
@@ -22,7 +19,7 @@ export default function GiftRate() {
   //card and type selected value
   const [brandValue, setBrandValue] = React.useState("");
   const [typeValue, setTypeValue] = React.useState("");
-  const [loading, setLoading] = React.useState(false)
+
   //amount state
   const [amount, setAmount] = React.useState('');
   const [comment, setComment] = React.useState('');
