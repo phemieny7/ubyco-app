@@ -55,7 +55,13 @@ export default function CoinScreen({ navigation, route }) {
   return (
     <SafeAreaView style={{ backgroundColor: "#f9e8ef", flex: 1 }}>
       <View>
-        <Header />
+        {/* <Header /> */}
+          <Element.Icon
+                    type='material'
+                    name='arrow-back'
+                    containerStyle={{ alignSelf: 'flex-start', margin: 20 }}
+                    onPress={() => navigation.goBack()}
+            />
       </View>
 
       <KeyboardAwareScrollView

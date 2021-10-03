@@ -10,6 +10,7 @@
  import LoginScreen from '../screens/Auth/LoginScreen';
  import SignUpScreen from '../screens/Auth/SignUpScreen';
  import VerifyScreen from '../screens/Auth/VerifyScreen'
+ import ResetPasswordScreen from '../screens/Auth/ResetPasswordScreen'
  import SplashScreen from '../screens/Splash/SplashScreen'
  import { AuthTabParamList, AuthParamList} from '../types';
  
@@ -49,6 +50,14 @@
           }}
        />
 
+    <AuthTab.Screen
+         name="ResetPassword"
+         component={ResetPasswordNavigator}
+         options={{
+           headerShown: false
+          }}
+       />
+
      </AuthTab.Navigator>
    );
  }
@@ -70,7 +79,19 @@
     </AuthStack.Navigator>
   );
 }
-
+function ResetPasswordNavigator() {
+  return (
+    <AuthStack.Navigator>
+      <AuthStack.Screen
+        name="ResetPasswordScreen"
+        component={ResetPasswordScreen}
+        options={{
+         headerShown: false
+       }}
+      />
+    </AuthStack.Navigator>
+  );
+}
  function LoginNavigator() {
    return (
      <AuthStack.Navigator>

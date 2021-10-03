@@ -5,7 +5,7 @@ import { ColorSchemeName } from 'react-native';
 
 import ImageBrowser from '../screens/ImageBrowser';
 import ProfileScreen from '../screens/ProfileScreen';
-import GiftCardHistroyScreen from '../screens/GiftCardHistroyScreen';
+// import GiftCardHistroyScreen from '../screens/GiftCardHistroyScreen';
 
 import { RootStackParamList } from '../types';
 import AuthTabNavigator from './AuthTabNavigator';

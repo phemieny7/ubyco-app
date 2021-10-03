@@ -121,4 +121,6 @@ export default function RateCalculatorScreen() {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  
+});

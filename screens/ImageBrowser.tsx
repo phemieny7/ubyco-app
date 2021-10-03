@@ -82,6 +82,7 @@ export default function ImageBrowserScreen({navigation, route}){
                 <Element.Icon
                     type='material'
                     name='arrow-back'
+                    size={30}
                     containerStyle={{ alignSelf: 'flex-start', margin: 20 }}
                     onPress={() => navigation.goBack()}
                 />

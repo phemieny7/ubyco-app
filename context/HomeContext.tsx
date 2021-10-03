@@ -26,7 +26,6 @@ const getUser = (dispatch: (arg0: { type: string; payload: any }) => void) => {
   return async (callback: (arg0: any) => void) => {
     try {
       const response = await Server.get("/user");
-      console.log(response)
       dispatch({ type: "get_user", payload: response.data.message });
     } catch (err) {
       dispatch({ type: "add_error", payload: "Network error" });

@@ -64,8 +64,11 @@ const  HomeScreen = ({navigation}) =>{
   }
 
   React.useEffect(() => {
-    fetchUser()
-    fetchCard()
+    const willFocusSubscription = navigation.addListener('focus', () => {
+      fetchUser()
+      fetchCard()
+      state
+  });
   },[]);
 
 
@@ -103,20 +106,20 @@ const  HomeScreen = ({navigation}) =>{
                   name='cards'
                   type='material-community'
                   color='#f63757'
-                  onPress={()=>{navigation.navigate('GiftcardHistroy')}}
+                  onPress={()=>{navigation.navigate('Root', {screen: 'HistroyScreen'})}}
                 />
                 <Element.Text>
                   Gift Cards
                 </Element.Text>
               </View>
               <View style={{alignItems: 'center'}}> 
-              <Element.Icon
+                <Element.Icon
                   reverse
                   name='bitcoin'
                   type='material-community'
                   color='#f63757'
-                  onPress={()=>{console.log('working')}}
-                />
+                  onPress={()=>{navigation.navigate('Root', {screen: 'HistroyScreen'})}}
+                 />
                 <Element.Text>
                   Crypto
                 </Element.Text>
@@ -127,7 +130,8 @@ const  HomeScreen = ({navigation}) =>{
                   name='bank'
                   type='material-community'
                   color='#f63757'
-                  onPress={()=>{console.log('working')}}
+                  onPress={()=>{navigation.navigate('Root', {screen: 'HistroyScreen'})}}
+                   
                 />
                 <Element.Text>
                   Withdraw

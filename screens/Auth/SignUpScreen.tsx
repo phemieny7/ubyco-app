@@ -18,7 +18,6 @@ const SignUpScreen = ({navigation}) => {
         const clearError = navigation.addListener('blur', () => {
             clearMessage()
         });
-    
         return clearError;
       }, [navigation]);
 
@@ -169,7 +168,7 @@ const SignUpScreen = ({navigation}) => {
                         title='Already have an account? Sign In'
                         type='clear'
                         titleStyle={{ color: '#f63757' }}
-                        onPress={() => navigation.navigate('Verify')}
+                        onPress={() => navigation.navigate('Login')}
                     />
                 </KeyboardAwareScrollView>
 

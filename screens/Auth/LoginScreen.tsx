@@ -118,7 +118,7 @@ const LoginScreen = ({ navigation }) => {
                         title='Forget Password?'
                         type='clear'
                         titleStyle={{ color: '#f63757', fontSize: 13 }}
-                        onPress={() => navigation.navigate('SignUp')}
+                        onPress={() => navigation.navigate('ResetPassword')}
                         containerStyle={{ alignSelf: 'flex-end', marginRight: 10 }}
                     />
                     <Element.Button

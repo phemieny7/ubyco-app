@@ -10,7 +10,7 @@ import RandomInput from '../components/RandomInput';
 import Button from '../components/Button'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { useFocusEffect } from '@react-navigation/native';
-
+import { useIsFocused } from '@react-navigation/native';
 import { Context as Home } from '../context/HomeContext'
 
 
@@ -31,7 +31,6 @@ export default function GiftCardScreen({ route, navigation }) {
   const [rate, setRate] = React.useState(null)
   const [id, setId] = React.useState(null)
   const [image, setImage] = React.useState(null);
-
   //total state
   const [total, setTotal] = React.useState(null);
   const { state, cardType, initiateCardTrade } = React.useContext(Home);
@@ -39,6 +38,7 @@ export default function GiftCardScreen({ route, navigation }) {
   // data coming Context Api State
   const cards = state.card
 
+  const isFocused = useIsFocused();
   //fetch cards function
   const getCards = React.useCallback(() => {
     if (cards) {
@@ -48,9 +48,8 @@ export default function GiftCardScreen({ route, navigation }) {
 
   //fecth cards on render
   React.useEffect(() => {
-    getCards()
-  }, [getCards]);
-
+   getCards()
+  }, [isFocused]);
 
   //when brand is selected
   const onBrandSelect = async (event: React.SetStateAction<string>) => {

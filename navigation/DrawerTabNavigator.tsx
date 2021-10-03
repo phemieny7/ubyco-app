@@ -113,7 +113,7 @@ export default function DrawerTabNavigator() {
         }}
       />
 
-      <DrawerTab.Screen
+      {/* <DrawerTab.Screen
         name="Inbox"
         component={HomeNavigator}
         options={{
@@ -121,9 +121,9 @@ export default function DrawerTabNavigator() {
             <MaterialCommunityIcons name="email" size={24} color="#f63757" />
           ),
         }}
-      />
+      /> */}
 
-      <DrawerTab.Screen
+      {/* <DrawerTab.Screen
         name="Notifications"
         component={HomeNavigator}
         options={{
@@ -131,7 +131,7 @@ export default function DrawerTabNavigator() {
             <AntDesign name="bells" size={24} color="#f63757" />
           ),
         }}
-      />
+      /> */}
     </DrawerTab.Navigator>
   );
 }
@@ -228,7 +228,7 @@ function HistroyNavigator() {
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen
-        name="Histroy"
+        name="HistroyScreen"
         component={HistroyScreen}
         options={{
           headerShown: false,
