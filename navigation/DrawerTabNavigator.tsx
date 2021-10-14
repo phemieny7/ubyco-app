@@ -21,6 +21,8 @@ import RateCalculatorScreen from "../screens/RateCalculatorScreen";
 import WithdrawalScreen from "../screens/WithdrawalScreen";
 import AccountScreen from "../screens/AccountScreen";
 import HistroyScreen from "../screens/HistroyScreen";
+import ResetPasswordScreen from "../screens/Auth/ResetPasswordScreen";
+import ChangePasswordScreen from "../screens/ChangePasswordScreen";
 
 const DrawerTab = createDrawerNavigator();
 
@@ -113,15 +115,15 @@ export default function DrawerTabNavigator() {
         }}
       />
 
-      {/* <DrawerTab.Screen
-        name="Inbox"
+      <DrawerTab.Screen
+        name="Help"
         component={HomeNavigator}
         options={{
           drawerIcon: () => (
-            <MaterialCommunityIcons name="email" size={24} color="#f63757" />
+            <MaterialCommunityIcons name="chat" size={24} color="#f63757" />
           ),
         }}
-      /> */}
+      />
 
       {/* <DrawerTab.Screen
         name="Notifications"
@@ -230,6 +232,20 @@ function HistroyNavigator() {
       <HomeStack.Screen
         name="HistroyScreen"
         component={HistroyScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+    </HomeStack.Navigator>
+  );
+}
+
+function ChangePasswordNavigator() {
+  return (
+    <HomeStack.Navigator>
+      <HomeStack.Screen
+        name="ChangePassword"
+        component={ChangePasswordScreen}
         options={{
           headerShown: false,
         }}

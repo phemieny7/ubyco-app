@@ -25,8 +25,19 @@ export default function AccountScreen({navigation}) {
 
     const [code, setCode] = React.useState(null);
     //card and type selected value
-    const { state, fetchBank, bankAccountName, addAccount, getAccount } = React.useContext(Home);
+    const {fetchBank, bankAccountName, addAccount, getAccount } = React.useContext(Home);
 
+    React.useEffect(() => {
+        const clearError = navigation.addListener('blur', () => {
+           setBank([])
+           setBankValue("")
+           setAccountName(null)
+           setAccountNumber(null)
+           setBankName(null)
+           setAccount(null)
+        });
+        return clearError;
+    }, [navigation]);
 
     //fetch cards function
     const getBanks = React.useCallback(async () => {
@@ -175,8 +186,8 @@ export default function AccountScreen({navigation}) {
                                 <AccountCard
                                     key={i}
                                     bank={l.bank}
-                                    accountNumber={l.account_number}
-                                    name={l.account_name}
+                                    accountNumber={l.account_name}
+                                    name={l.account_number}
                                 />
                             )) : <Text> No account Yet</Text>
                         }

@@ -28,7 +28,7 @@ const SignUpScreen = ({navigation}) => {
             state.errorMessage = ''
             setLoading(true)
             await signup(fullname, phone, email, password, () => {
-                navigation.navigate('Verify')
+                navigation.navigate('Verify', {params:{screen:'Root', phone}})
             })
             setLoading(false)
     };
@@ -39,8 +39,9 @@ const SignUpScreen = ({navigation}) => {
                 <Element.Icon
                     type='material'
                     name='arrow-back'
+                    color='#f63757'
                     containerStyle={{ alignSelf: 'flex-start', margin: 20 }}
-                    onPress={() => navigation.navigate('Login')}
+                    onPress={() => navigation.goBack()}
                 />
                 <Element.Text style={{
                     alignSelf: 'center',
@@ -129,7 +130,7 @@ const SignUpScreen = ({navigation}) => {
                         value={phone}
                         onChangeText={setPhone}
                         autoCapitalize='none'
-                        keyboardType='numeric'
+                        keyboardType='phone-pad'
                     />
                     {/* Set password input */}
                     <Element.Input
@@ -188,9 +189,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#f9e8ef',
         justifyContent: 'center'
     },
-    // header:{
-    //     backgroundColor: '#f9e8ef'
-    // },
 
     footer: {
         flex: 4,

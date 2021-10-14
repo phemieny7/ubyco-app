@@ -106,7 +106,7 @@ const  HomeScreen = ({navigation}) =>{
                   name='cards'
                   type='material-community'
                   color='#f63757'
-                  onPress={()=>{navigation.navigate('Root', {screen: 'HistroyScreen'})}}
+                  onPress={()=>{navigation.navigate('Root', {screen: 'Transaction Histroy'})}}
                 />
                 <Element.Text>
                   Gift Cards
@@ -118,7 +118,8 @@ const  HomeScreen = ({navigation}) =>{
                   name='bitcoin'
                   type='material-community'
                   color='#f63757'
-                  onPress={()=>{navigation.navigate('Root', {screen: 'HistroyScreen'})}}
+                  onPress={()=>{navigation.navigate('Root', {screen: 'Transaction Histroy'})}}
+                  
                  />
                 <Element.Text>
                   Crypto
@@ -130,8 +131,8 @@ const  HomeScreen = ({navigation}) =>{
                   name='bank'
                   type='material-community'
                   color='#f63757'
-                  onPress={()=>{navigation.navigate('Root', {screen: 'HistroyScreen'})}}
-                   
+                  onPress={()=>{navigation.navigate('Root', {screen: 'Transaction Histroy'})}}
+  
                 />
                 <Element.Text>
                   Withdraw

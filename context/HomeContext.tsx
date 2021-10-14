@@ -147,7 +147,7 @@ const initiateCardTrade = (dispatch: any) => {
       });
       callback(response.status);
     } catch (error) {
-      callback(error.response.status);
+      return error;
     }
   };
 };
@@ -215,7 +215,7 @@ const addAccount = (dispatch: any) => {
       });
       callback(response.status);
     } catch (error) {
-      callback(error.response.status);
+      return error;
     }
   };
 };
@@ -245,7 +245,7 @@ const updateProfile = (dispatch: any) => {
     try {
       const token = await AsyncStorage.getItem("token");
       let formData = new FormData();
-      // formData.append(`picture`, { uri: image.uri, name: image.name, type: 'image/jpg' })
+      formData.append(`picture`, { uri: image.uri, name: image.name, type: 'image/jpg' })
       formData.append("fullname", fullname);
       formData.append("phone", phone);
       formData.append("email", email);

@@ -6,19 +6,23 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { useFocusEffect } from "@react-navigation/native";
 import { Context as Home } from "../context/HomeContext";
 import HistroyItem from "./HistroyItem";
+import { useIsFocused } from '@react-navigation/native';
+
 
 
 
 export default function CryptoHistroy() {
   const [history, setHistory] = React.useState([]);
   const {getUser, state} = React.useContext(Home);
+  const isFocused = useIsFocused();
+
   const user  = async() => {
     let res = await getUser()
   }
   React.useEffect(() => {
     user()
     setHistory(state.user.coinTransaction)
-  }, [history])
+  }, [isFocused])
   return (
     <KeyboardAwareScrollView>
       <View style={{ flex: 1}}>

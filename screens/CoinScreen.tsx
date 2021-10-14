@@ -1,6 +1,6 @@
 import * as React from "react";
 import { StyleSheet, SafeAreaView } from "react-native";
-import { View } from "react-native";
+import { View, Clipboard } from "react-native";
 import * as Element from "react-native-elements";
 import Picker from "../components/Picker";
 import Title from "../components/theme/Title";
@@ -10,6 +10,7 @@ import Button from "../components/Button";
 import { useFocusEffect } from "@react-navigation/native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Context as Home } from "../context/HomeContext";
+// import Clipboard from 'expo-clipboard';
 
 export default function CoinScreen({ navigation, route }) {
   const [coin, setCoin] = React.useState([]);
@@ -22,6 +23,7 @@ export default function CoinScreen({ navigation, route }) {
   const [id, setId] = React.useState(null);
   const [total, setTotal] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
+  const [wallet, setWallet] = React.useState('');
 
   const { coinType, initiateCoinTrade } = React.useContext(Home);
 
@@ -34,6 +36,7 @@ export default function CoinScreen({ navigation, route }) {
             label: any;
             value: any;
             rate: any;
+            wallet: string;
           }
         ) => React.SetStateAction<never[]>;
       }) => {
@@ -43,6 +46,7 @@ export default function CoinScreen({ navigation, route }) {
             label: element.name,
             value: element.name,
             rate: element.rate,
+            wallet: element.wallet
           }))
         );
       }
@@ -67,14 +71,17 @@ export default function CoinScreen({ navigation, route }) {
     setAmount("");
     setCheck(false);
     setCoinValue(e);
+    setWallet('')
   };
 
   const onChangePrice = (e: React.SetStateAction<string>) => {
     if (coinValue != null) {
-      let obj = coin.find((o) => o.label === coinValue);
+     
+      let obj:any = coin.find((o) => o.label === coinValue);
       setId(obj.key);
       setRate(obj.rate);
       setAmount(e);
+      setWallet(obj.wallet);
     } else {
       alert("Select a coin");
     }
@@ -105,10 +112,16 @@ export default function CoinScreen({ navigation, route }) {
         setRate(null);
         setId(null);
         setAmount("");
+        setWallet("");
       }
     });
     setLoading(false);
   };
+  const copyToClipboard = () => {
+    Clipboard.setString(wallet);
+    alert('Address Copied to Clipboard')
+  };
+
 
   const renderImage = (item: { uri: any }, i: React.Key | null | undefined) => {
     <Element.Image
@@ -170,6 +183,7 @@ export default function CoinScreen({ navigation, route }) {
             value={total}
             onChangeText={setTotal}
             disable
+            keyType='default'
           />
 
           <View
@@ -179,6 +193,22 @@ export default function CoinScreen({ navigation, route }) {
             }}
           />
 
+            {
+              wallet !== '' ?
+              <View style={{flexDirection:'column', margin:10}}>
+                <Element.Text style={{justifyContent:'center'}}>Address</Element.Text> 
+                <Element.Button title={wallet} titleStyle={{color:'red'}}  type="clear" onPress={() => copyToClipboard()}/>
+            </View>:<Element.Text style={{flexDirection:'column', margin:10}}>
+                Enter an amount to get a wallet address
+              </Element.Text>
+            }
+          <View
+            style={{
+              borderBottomColor: "gray",
+              borderBottomWidth: 1,
+            }}
+          />
+          
           <Element.Button
             title="Upload Receipt"
             titleStyle={{ alignSelf: "flex-end", color: "black" }}
@@ -187,6 +217,7 @@ export default function CoinScreen({ navigation, route }) {
             onPress={pickImage}
             type="outline"
           />
+
           <View style={{ flexDirection: "row" }}>
             {image &&
               image.map(

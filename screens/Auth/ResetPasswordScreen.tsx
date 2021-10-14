@@ -1,43 +1,68 @@
 import * as React from 'react'
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native'
-import { useNavigation } from '@react-navigation/native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import * as Element from 'react-native-elements'
 import { Context as AuthContext } from '../../context/AuthContext'
 
 
+interface actionContext {
+    state: any;
+    forget: any;
+    clearMessage: any;
+}
 
-const ResetPasswordScreen = () => {
-    const navigation = useNavigation();
+const ResetPasswordScreen = ({navigation}) => {
     const [phone, setPhone] = React.useState('')
-    const [success, setSuccess] = React.useState('')
     const [loading, setLoading] = React.useState(false)
-    const { state, verify, clearMessage } = React.useContext(AuthContext)
+    const { state, forget, clearMessage } = React.useContext<actionContext>(AuthContext)
 
-   React.useEffect(() => {
-    const clearError = navigation.addListener('blur', () => {
-        clearMessage()
-    });
+    React.useEffect(() => {
+        const clearError = navigation.addListener('blur', () => {
+            setPhone('')
+            clearMessage()
+        });
         return clearError;
     }, [navigation]);
-    
-    const setColor = () => {
-        if (phone.length >= 11) {
-            setSuccess('green')
-        }
-    }
 
     const doReset = async () => {
         state.errorMessage = ''
         setLoading(true)
-        await verify(phone, () => {
-            navigation.navigate('Root')
+        await forget(phone, () => {
+            navigation.navigate('Verify',{ItemId: 1});
         })
         setLoading(false)
     };
     return (
         <SafeAreaView style={styles.container}>
-            <View style={styles.header} />
+            <View style={styles.header}>
+                <View style={{ flexDirection: 'row', marginTop: 5 }}>
+                    <Element.Icon
+                        type='material'
+                        name='arrow-back'
+                        color='#f63757'
+                        containerStyle={{ alignSelf: 'flex-start', margin: 20 }}
+                        onPress={() => navigation.goBack()}
+                    />
+                    <Element.Text style={{
+                        alignSelf: 'center',
+                        fontSize: 19,
+                        color: '#f63757',
+                        fontWeight: 'bold'
+                    }}>
+                        Reset Password
+                    </Element.Text>
+                </View>
+                <View style={{ alignSelf: 'center' }}>
+                    <Element.Image
+                        source={require('../../assets/images/logo.png')}
+                        style={{
+                            height: 200,
+                            width: 200,
+                            alignSelf: 'center'
+                        }}
+                    />
+                </View>
+            </View>
             <View style={styles.footer}>
                 <Element.Text style={{
                     alignSelf: 'flex-start',
@@ -46,7 +71,7 @@ const ResetPasswordScreen = () => {
                     fontWeight: 'normal',
                     margin: 20
                 }}>
-                
+
                 </Element.Text>
                 {/* Email Input type */}
 
@@ -59,27 +84,27 @@ const ResetPasswordScreen = () => {
                         leftIcon={
                             <Element.Icon
                                 type='material-icon'
-                                name='mail'
+                                name='phone'
                                 size={24}
-                                color={phone.length == 6 ? 'green' : 'red'}
+                                color={phone.length > 10 ? 'red' : 'black'}
                             />
                         }
                         maxLength={13}
                         errorStyle={{ color: '#f63757' }}
-                        placeholder='Token'
-                        errorMessage={state.errorMessage.verification_code ? state.errorMessage.verification_code: state.errorMessage}
+                        placeholder='Enter your phone number'
+                        errorMessage={state.errorMessage.verification_code ? state.errorMessage.verification_code : state.errorMessage}
                         value={phone}
                         onChangeText={setPhone}
                         autoCapitalize='none'
-                        keyboardType='numeric'
+                        keyboardType='phone-pad'
                         autoCorrect={false}
                     />
                     <Element.Button
                         buttonStyle={{ height: 50, backgroundColor: '#f63757', borderRadius: 10 }}
                         containerStyle={{ margin: 10 }}
                         loading={loading}
-                        title='Reset Password'
-                        onPress={doReset}
+                        title='Request token'
+                        onPress={() => doReset()}
                     />
                 </KeyboardAwareScrollView>
             </View>
@@ -97,6 +122,7 @@ const styles = StyleSheet.create({
     header: {
         backgroundColor: '#f9e8ef',
         flex: 2,
+        // margin:20
     },
     footer: {
         flex: 3,

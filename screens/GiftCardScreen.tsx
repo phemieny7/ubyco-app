@@ -51,6 +51,14 @@ export default function GiftCardScreen({ route, navigation }) {
    getCards()
   }, [isFocused]);
 
+//   const clearError = navigation.addListener('blur', () => {
+//     setBrand([])
+//     setImage(null)
+//     setType([])
+//     setAmount("")
+//     setComment(null)
+//  });
+
   //when brand is selected
   const onBrandSelect = async (event: React.SetStateAction<string>) => {
     setBrandValue(event);
@@ -96,6 +104,7 @@ export default function GiftCardScreen({ route, navigation }) {
     await initiateCardTrade(id, amount, comment, image, rate, (data: number) => {
       if (data == 200) {
         alert('Trade successfully Initiated.')
+        setBrand([])
         setType([])
         setRate(null)
         setId(null)
@@ -111,8 +120,12 @@ export default function GiftCardScreen({ route, navigation }) {
 
   //helps to update when price changes
   React.useEffect(() => {
+    if (rate == 0){
+      setTotal('Request Rate Via Chat') 
+    }else{
     const tot = Number(amount) * Number(rate)
     setTotal(`${tot}`)
+    }
   }, [amount]);
 
   //render image uploaded image

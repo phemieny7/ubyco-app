@@ -27,17 +27,20 @@ const LoginScreen = ({ navigation }) => {
         setLoading(false)
     };
 
-
-
     const goToSignUp = () => navigation.navigate('SignUp')
 
     React.useEffect(() => {
         const clearError = navigation.addListener('blur', () => {
             clearMessage()
         });
-
         return clearError;
     }, [navigation]);
+
+    React.useEffect(()=> {
+        if (email.length > 0){
+            clearMessage()
+        }
+    }, [email])
 
     return (
 

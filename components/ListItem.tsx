@@ -2,8 +2,6 @@ import React,{FC} from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import * as Elements from 'react-native-elements'
 
-
-
 interface Props {
     name: string;
     rate: string;
@@ -23,7 +21,7 @@ const ListItem :FC<Props>= ({name, rate, image}) => {
             <Elements.Text style={{color: 'white', fontSize:18, alignSelf:'center'}}> 
                 {name}
             </Elements.Text>
-            <Elements.Text style={{color: 'white', fontSize:18, alignSelf:'center', paddingRight: 20}}> 
+            <Elements.Text style={{color: 'white', fontSize:18, alignSelf:'flex-end', margin:15}}> 
                 {rate}
             </Elements.Text>
 

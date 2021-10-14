@@ -3,8 +3,8 @@ import { StyleSheet, SafeAreaView, Dimensions, Platform } from 'react-native';
 import { Text, View, FlatList, Image } from 'react-native';
 import * as Element from 'react-native-elements'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import { useFocusEffect } from '@react-navigation/native';
 import moment from 'moment'
+import { useIsFocused } from '@react-navigation/native';
 
 import { Context as Home } from '../context/HomeContext'
 
@@ -13,11 +13,10 @@ export default function WithdrawalHistroy() {
 
   const [history, setHistory] = React.useState([]);
   const {state} = React.useContext(Home);
-  
+  const isFocused = useIsFocused();
   React.useEffect(() => {
-   setHistory(state.user.userWithdrawal)
-  //  console.log(state.user.cardTransaction)
- }, [state]);
+    setHistory(state.user.userWithdrawal)
+  }, [isFocused]);
   
   return (
       <KeyboardAwareScrollView style={{ flex: 1 }}>

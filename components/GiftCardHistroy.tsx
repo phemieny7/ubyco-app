@@ -6,6 +6,8 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { useFocusEffect } from "@react-navigation/native";
 import { Context as Home } from "../context/HomeContext";
 import HistroyItem from "./HistroyItem";
+import { useIsFocused } from '@react-navigation/native';
+
 
 
 
@@ -15,10 +17,12 @@ export default function GiftCardHistroy() {
   const user  = async() => {
     let res = await getUser()
   }
+  const isFocused = useIsFocused();
+
   React.useEffect(() => {
     user()
     setHistory(state.user.cardTransaction)
-  }, [history])
+  }, [isFocused])
   return (
     <KeyboardAwareScrollView>
       <View style={{ flex: 1}}>

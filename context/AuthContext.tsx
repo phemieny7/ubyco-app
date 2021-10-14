@@ -3,7 +3,7 @@ import Server from '../api/Server';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-const authReducer =(state:object, action:any) => {
+const authReducer = (state: object, action: any) => {
     switch (action.type) {
         case 'login':
             return { ...state, token: action.payload };
@@ -26,77 +26,87 @@ const clearMessage = (dispatch: (arg0: { type: string; }) => void) => () => {
 }
 
 
-const login = (dispatch: (arg0: { type: string; payload: any; }) => void) => async(email:string, password:string, callback:() => void) => {
-        try {
-            const response = await Server.post('/login',
-                { email, password },
-                { timeout: 10000, timeoutErrorMessage: 'something went wrong' });
-            await AsyncStorage.setItem('token', response.data.message.token)
-            dispatch({ type: 'login', payload: response.data.message.token })
-            callback();
-        }
-        catch (err) {
-            const message = err.response.data
-            const network = err.response.status
-            if (Object.keys(message).length <= 0 || undefined) {
-                dispatch({ type: 'add_error', payload: 'Invalid user details' })
-            } else if (network == 400 && Object.keys(message).length > 0) {
-                let errors = message.messages.errors
-                const uniques = errors.map(
-                    (obj: { field: any; }) => {
-                        return obj.field
-                    }
-                )
-                let obj = {}
-                for (var i = 0; i < uniques.length; i++) {
-                    obj[uniques[i]] = errors[i].message;
-                    dispatch({ type: 'add_error', payload: obj })
+const login = (dispatch: (arg0: { type: string; payload: any; }) => void) => async (email: string, password: string, callback: () => void) => {
+    try {
+        const response = await Server.post('/login',
+            { email, password },
+            { timeout: 10000, timeoutErrorMessage: 'something went wrong' });
+        await AsyncStorage.setItem('token', response.data.message.token)
+        dispatch({ type: 'login', payload: response.data.message.token })
+        callback();
+    }
+    catch (err:any) {
+        const message = err.response.data
+        const network = err.response.status
+        if (Object.keys(message).length <= 0 || undefined) {
+            dispatch({ type: 'add_error', payload: 'Invalid user details' })
+        } else if (network == 400 && Object.keys(message).length > 0) {
+            let errors = message.messages.errors
+            const uniques = errors.map(
+                (obj: { field: any; }) => {
+                    return obj.field
                 }
-            } else if (network == 401) {
-                dispatch({ type: 'add_error', payload: err.response.data.message })
-            } else {
-                dispatch({ type: 'add_error', payload: 'something went wrong' })
+            )
+            let obj = {}
+            for (var i = 0; i < uniques.length; i++) {
+                obj[uniques[i]] = errors[i].message;
+                dispatch({ type: 'add_error', payload: obj })
             }
-
+        } else if (network == 401) {
+            dispatch({ type: 'add_error', payload: err.response.data.message })
+        } else {
+            dispatch({ type: 'add_error', payload: 'something went wrong' })
         }
+    }
 };
 
 const signup = (dispatch: (arg0: { type: string; payload: string | {}; }) => void) => async (fullname: any, phone: any, email: any, password: any, callback: () => void) => {
-        try {
-            const response = await Server.post('/register', { fullname, phone, email, password });
-            callback();
-        } catch (err) {
-            const message = err.response.data
-            const network = err.response.status
-            if (Object.keys(message).length <= 0) {
-                dispatch({ type: 'add_error', payload: 'User already exist' })
-            } else if (network == 400 && Object.keys(message).length > 0) {
-                let errors = message.errors
-                const uniques = errors.map(
-                    (obj: { field: any; }) => {
-                        return obj.field
-                    }
-                )
-                let obj = {}
-                for (var i = 0; i < uniques.length; i++) {
-                    obj[uniques[i]] = errors[i].message;
-                    dispatch({ type: 'add_error', payload: obj });
+    try {
+        const response = await Server.post('/register', { fullname, phone, email, password });
+        callback();
+    } catch (err:any) {
+        const message = err.response.data
+        const network = err.response.status
+        if (Object.keys(message).length <= 0) {
+            dispatch({ type: 'add_error', payload: 'User already exist' })
+        } else if (network == 400 && Object.keys(message).length > 0) {
+            let errors = message.errors
+            const uniques = errors.map(
+                (obj: { field: any; }) => {
+                    return obj.field
                 }
-            }else {
-                 dispatch({ type: 'add_error', payload: 'something went wrong' })
+            )
+            let obj = {}
+            for (var i = 0; i < uniques.length; i++) {
+                obj[uniques[i]] = errors[i].message;
+                dispatch({ type: 'add_error', payload: obj });
             }
         }
-    };
+        else {
+            dispatch({ type: 'add_error', payload: 'something went wrong' })
+        }
+        
+    }
+};
 
 const verify = (dispatch: (arg0: { type: string; payload: any; }) => void) => async (token: any, callback: () => void) => {
-        try {
-            const response = await Server.put('/verify', { verification_code: token });
-            await AsyncStorage.setItem('token', response.data.message.token)
-            dispatch({ type: 'login', payload: response.data.message.token })
-            callback();
-        } catch (err) {            
-                dispatch({ type: 'add_error', payload: 'something went wrong' })
-            }
+    try {
+        const response = await Server.put('/verify', { verification_code: token });
+        await AsyncStorage.setItem('token', response.data.message.token)
+        dispatch({ type: 'login', payload: response.data.message.token })
+        callback();
+    } catch (err) {
+        dispatch({ type: 'add_error', payload: 'something went wrong' })
+    }
+};
+
+const forget = (dispatch: (arg0: { type: string; payload: any; }) => void) => async (phone: any, callback: () => void) => {
+    try {
+        const response = await Server.put('/forget', {phone});
+        callback();
+    } catch (err:any) {
+        dispatch({ type: 'add_error', payload: 'Invalid User Input' })
+    }
 };
 
 const Logout = (dispatch: any) => {
@@ -107,14 +117,14 @@ const Logout = (dispatch: any) => {
 };
 
 const checkToken = (dispatch: (arg0: { type: string; }) => any) => {
-    return async() => {
+    return async () => {
         const token = await AsyncStorage.getItem('token')
-        token ?  dispatch({ type: 'login' }) : null ;
+        token ? dispatch({ type: 'login' }) : null;
     }
 };
 
 
 export const { Context, Provider } = createDataContext(authReducer,
     {
-        checkToken, login, signup, verify, Logout, clearMessage
+        checkToken, login, signup, verify, Logout, clearMessage, forget
     }, { errorMessage: '', token: null, message: '' })

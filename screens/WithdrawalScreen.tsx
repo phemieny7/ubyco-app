@@ -25,6 +25,8 @@ const WithdrawalScreen = () => {
                 setNoAccount(false)
         }else{
             setAccount(data.map((element: { id: any; bank: string; code: any; }) => ({ key: element.id, label: element.bank, value: element.bank, code: element.code })))
+
+            console.log(account)
         } 
         });
     }
@@ -63,12 +65,12 @@ React.useEffect(() => {
         
         <KeyboardAwareScrollView>
         <RandomInput title= 'Amount' placeholder='0' keyType='phone-pad' onChangeText={setAmount} value={amount}/>
-        <Picker
+            <Picker
                  title="Account" 
                  placeholder="Select your account" 
                  items={account}
                  value={`${value}`}
-                 onValueChange = {(value) => setValue(value)}
+                 onValueChange = {(key) => setValue(key)}
                  require = '*'
             />
         <View style={{marginHorizontal: 30, marginTop: 20}}>

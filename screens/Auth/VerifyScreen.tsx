@@ -1,22 +1,33 @@
 import * as React from 'react'
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native'
-import { useNavigation } from '@react-navigation/native';
+// import { useNavigation } from '@react-navigation/native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import * as Element from 'react-native-elements'
 import { Context as AuthContext } from '../../context/AuthContext'
 
+// export default class Employee extends React.Component<any, IState> { }
+
+interface actionContext {
+    state: any;
+    verify: any;
+    clearMessage: any;
+}
 
 
-const VerifyScreen = () => {
-    const navigation = useNavigation();
+const VerifyScreen = ({route, navigation}) => {
+    // const { screen, phone } = route.params;
+    console.log(route)
+    // const navigation = useNavigation();
+    // const {screen} = route.params
     const [token, setToken] = React.useState('')
     const [success, setSuccess] = React.useState('')
     const [loading, setLoading] = React.useState(false)
 
-    const { state, verify, clearMessage } = React.useContext(AuthContext)
+    const { state, verify, clearMessage } = React.useContext<actionContext>(AuthContext)
 
    React.useEffect(() => {
         const clearError = navigation.addListener('blur', () => {
+            setToken('')
             clearMessage()
         });
     
@@ -33,7 +44,7 @@ const VerifyScreen = () => {
         state.errorMessage = ''
         setLoading(true)
         await verify(token, () => {
-            navigation.navigate('Root')
+            navigation.navigate('Root',{screen: "ChangePassword"})
         })
         setLoading(false)
     };
@@ -42,7 +53,25 @@ const VerifyScreen = () => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <View style={styles.header} />
+            <View style={styles.header}>
+            <View style={{ flexDirection: 'row', marginTop: 20 }}>
+                    <Element.Icon
+                        type='material'
+                        name='arrow-back'
+                        color='#f63757'
+                        containerStyle={{ alignSelf: 'flex-start', margin: 20 }}
+                        onPress={() => navigation.goBack()}
+                    />
+                    <Element.Text style={{
+                        alignSelf: 'center',
+                        fontSize: 19,
+                        color: '#f63757',
+                        fontWeight: 'bold'
+                    }}>
+                       Confirm Token
+                    </Element.Text>
+                </View>
+            </View>
             <View style={styles.footer}>
                 <Element.Text style={{
                     alignSelf: 'flex-start',
@@ -51,7 +80,7 @@ const VerifyScreen = () => {
                     fontWeight: 'normal',
                     margin: 20
                 }}>
-                    Let's get you started, Fill in all details
+                    Kindly input the token sent to you
                 </Element.Text>
                 {/* Email Input type */}
 

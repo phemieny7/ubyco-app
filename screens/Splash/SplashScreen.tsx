@@ -10,8 +10,6 @@ const fetchToken = async() => {
    const token = await AsyncStorage.getItem('token')
    state.token = token
    token ? navigation.navigate('Root'): navigation.navigate('Login')
-  
-//    console.log(token)
 }
 
 React.useEffect(()=>{

@@ -3,7 +3,6 @@ import { StyleSheet, SafeAreaView } from "react-native";
 import { View } from "react-native";
 import * as Element from "react-native-elements";
 import Title from "../components/theme/Title";
-import Header from "../components/theme/Header";
 import { useFocusEffect } from "@react-navigation/native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Context as Home } from "../context/HomeContext";
@@ -17,7 +16,7 @@ export default function CoinScreen({ navigation, route }) {
   const [loading, setLoading] = React.useState(false);
   const [showPassword, setShowPassword] = React.useState(true);
   const [image, setImage] = React.useState(
-    "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg"
+    `https://res.cloudinary.com/ubycohub/${state.user.picture}.jpg`
   );
 
   const fetchUser = async () => {
@@ -26,7 +25,7 @@ export default function CoinScreen({ navigation, route }) {
 
   React.useEffect(() => {
     fetchUser();
-  }, []);
+  }, [navigation]);
 
   const pickImage = () => {
     navigation.navigate("ImageBrowser", { screen: "Profile", max: 1 });
@@ -34,8 +33,9 @@ export default function CoinScreen({ navigation, route }) {
 
   useFocusEffect(
     React.useCallback(() => {
+      let set;
       const photo = route.params?.photos;
-      const set = setImage(photo);
+      photo !== undefined ? set=setImage(photo[0]) : null;
       return set;
     }, [route.params])
   );
@@ -76,11 +76,11 @@ export default function CoinScreen({ navigation, route }) {
           <Element.Avatar
             size="large"
             rounded
-            icon={{ name: "user", type: "font-awesome" }}
+            // icon={{ name: "user", type: "font-awesome" }}
             onPress={() => pickImage()}
             activeOpacity={0.7}
             source={{
-              uri: `${image}`, 
+              uri: `${route.params?.photos == undefined ? image : image.uri}`, 
             }}
           />
         </View>

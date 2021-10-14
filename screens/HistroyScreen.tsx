@@ -100,6 +100,8 @@ export default function RateCalculatorScreen() {
     { key: "third", title: "Withdrawals" },
   ]);
 
+  React.useEffect
+
   return (
     <SafeAreaView style={{ backgroundColor: "#f9e8ef", flex: 1 }}>
       <View>

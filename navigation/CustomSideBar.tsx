@@ -45,7 +45,7 @@ const CustomSideBar = (props: Props) => {
                 rounded
                 size="medium"
                 source={{
-                  uri: `${state.user.picture != null ? state.user.picture: icon}` ,
+                  uri: `${state.user.picture != null ? `https://res.cloudinary.com/ubycohub/${state.user.picture}.jpg`: icon}` ,
               }}
                 containerStyle={styles.sideMenuProfileIcon}
                 onPress={()=> navigation.navigate('Profile')}
@@ -70,7 +70,7 @@ const CustomSideBar = (props: Props) => {
 
       </View>
       <DrawerItemList {...props} />
-      <DrawerItem
+      {/* <DrawerItem
         label="Help"
         icon={({ focused, color, size }) => 
             <Element.Icon 
@@ -78,7 +78,7 @@ const CustomSideBar = (props: Props) => {
                 size= {24}
                 name={focused ? 'info' : 'info'}/>
         }
-        onPress={() => alert('Link to help')} />
+        onPress={() => alert('Link to help')} /> */}
       
 
     <DrawerItem
