@@ -22,6 +22,7 @@ const RandomInput: FC<Props> = ({title, keyType, placeholder, disable, secureTex
                 <Element.Input
                     containerStyle={{ 
                         width: 230,
+                        margin: 10
                     }}
                     placeholder={placeholder}
                     inputContainerStyle={styles.randomInput}
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
         flexDirection:'row', 
         justifyContent:'space-between',
         marginHorizontal: 30,
-        marginTop:20
+        marginTop:10
       },
       randomText:{ 
         fontSize: 18,

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, StyleSheet, Dimensions, StatusBar, ScrollView, SafeAreaView, Text } from 'react-native';
+import { View, StyleSheet, Dimensions, StatusBar, ScrollView, SafeAreaView, Text, Platform } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import Title from '../components/theme/Title'
 import Header from '../components/theme/Header'
@@ -52,7 +52,10 @@ React.useEffect(() => {
 
     return (
         <SafeAreaView style={{backgroundColor:'#f9e8ef', flex: 1}}>
-            <Header/>
+           <View  style={Platform.OS === 'android' ? {marginTop:30}: {marginTop:0}}>
+        <Header />
+      </View>
+
      
      
             <View style={{alignSelf:'center', marginTop: 20}}>

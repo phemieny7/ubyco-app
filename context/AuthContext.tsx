@@ -100,9 +100,9 @@ const verify = (dispatch: (arg0: { type: string; payload: any; }) => void) => as
     }
 };
 
-const forget = (dispatch: (arg0: { type: string; payload: any; }) => void) => async (phone: any, callback: () => void) => {
+const forget = (dispatch: (arg0: { type: string; payload: any; }) => void) => async (email: any, callback: () => void) => {
     try {
-        const response = await Server.put('/forget', {phone});
+        const response = await Server.put('/forget', {email});
         callback();
     } catch (err:any) {
         dispatch({ type: 'add_error', payload: 'Invalid User Input' })

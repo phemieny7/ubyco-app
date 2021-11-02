@@ -38,7 +38,7 @@ const CustomSideBar = (props: Props) => {
   return (
     <SafeAreaView style={{flex: 1}}>
       {/*Top Large Image */}
-      <DrawerContentScrollView {...props}>
+      <DrawerContentScrollView contentContainerStyle={{backgroundColor: "#fff"}}>
         {/* User Avatar */}
       <View style={styles.profile}> 
         <Element.Avatar
@@ -60,6 +60,7 @@ const CustomSideBar = (props: Props) => {
                 </Element.Text>
             </View>
         </View>
+
       <View style= {styles.balanceCard}>
         <Element.Text h4 style={{color:'white'}}>
            Available Balance
@@ -83,12 +84,14 @@ const CustomSideBar = (props: Props) => {
 
     <DrawerItem
         label="Logout"
+        activeTintColor="red"
+        inactiveTintColor="red"
         icon={({ focused, color, size }) => 
             <Element.Icon 
                 color={"#f63757"} 
                 size= {24}
                 type= 'font-awesome'
-                name={focused ? 'sign-out' : 'sign-out'}/>
+                name='sign-out'/>
         }
         onPress={logout} 
       />
@@ -143,7 +146,8 @@ const styles = StyleSheet.create({
     borderRadius:2,
     shadowRadius: 0.4,
     borderTopColor:'red',
-    elevation: 5      
+    elevation: 5,
+    backgroundColor:'#fff'   
     }
   });
   

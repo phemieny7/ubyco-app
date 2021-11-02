@@ -16,16 +16,29 @@ const Picker: FC<Props> = ({title,placeholder, items, onValueChange, value, requ
     return (
         <View style={pickerSelectStyles.container}> 
             <Text style={pickerSelectStyles.title}>{title}</Text>
-            <Text style={{color: 'red', paddingTop:10, fontSize:18}}>{require}</Text>
-            <RNPickerSelect
-                items={items}
-                onValueChange={onValueChange}
-                style={pickerSelectStyles}
-                value={value}
-                Icon={() => {
-                    return <Ionicons name="chevron-down" size={24} color="#f63757" style={{margin:20}}/>;
-            }}
-            />
+            <Text style={{color: 'red', paddingTop: 18, paddingLeft: 5}}>{require}</Text>
+            {
+              Platform.OS === 'ios' ?  <RNPickerSelect
+              items={items}
+              onValueChange={onValueChange}
+              style={pickerSelectStyles}
+              value={value}
+              Icon={() => {
+                  return <Ionicons name="chevron-down" size={24} color="#f63757" style={{padding: 18}}/>;
+          }}
+          /> : <View style={{ borderRadius: 18, borderColor:'red', borderWidth: 1, overflow: "hidden", height: 40, padding: 0, width:200, margin: 10 }}>
+                <RNPickerSelect
+              items={items}
+              onValueChange={onValueChange}
+              style={pickerSelectStyles}
+              value={value}
+              Icon={() => {
+                  return <Ionicons name="chevron-down" size={24} color="#f63757" style={Platform.OS === 'ios' ? {padding: 18} : {padding: 10}}/>;
+          }}
+          />
+            </View>
+            }
+           
         </View>
     )
 }
@@ -35,9 +48,8 @@ export default Picker
 const pickerSelectStyles = StyleSheet.create({
   container:{
       flexDirection:'row',
-      marginHorizontal: 30,
-      marginTop:20,
-      justifyContent:'space-between'
+      margin:20,
+      alignContent: "center"
   },
   title:{
       fontSize: 18,
@@ -48,7 +60,7 @@ const pickerSelectStyles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'normal',
     paddingHorizontal: 10,
-    borderWidth: 1,
+    borderWidth: 2,
     borderColor: 'red',
     borderRadius: 18,
     color: '#f63757',
@@ -60,13 +72,10 @@ const pickerSelectStyles = StyleSheet.create({
   inputAndroid: {
     fontSize: 18,
     fontWeight: '400',
-    paddingHorizontal: 10,
-    paddingVertical: 8,
-    borderWidth: 0.5,
-    borderColor: 'purple',
-    borderRadius: 18,
     color: '#f63757',
     paddingRight: 30, // to ensure the text is never behind the icon
+    margin: 10,
+
   },
 
 });

@@ -23,6 +23,7 @@ import AccountScreen from "../screens/AccountScreen";
 import HistroyScreen from "../screens/HistroyScreen";
 import ResetPasswordScreen from "../screens/Auth/ResetPasswordScreen";
 import ChangePasswordScreen from "../screens/ChangePasswordScreen";
+import HelpScreen from "../screens/HelpScreen";
 
 const DrawerTab = createDrawerNavigator();
 
@@ -32,6 +33,7 @@ export default function DrawerTabNavigator() {
     <DrawerTab.Navigator
       drawerContentOptions={{
         activeTintColor: "#f63757",
+        inactiveTintColor: "red",
         itemStyle: { marginVertical: 5 },
       }}
       screenOptions={{
@@ -117,7 +119,7 @@ export default function DrawerTabNavigator() {
 
       <DrawerTab.Screen
         name="Help"
-        component={HomeNavigator}
+        component={HelpNavigator}
         options={{
           drawerIcon: () => (
             <MaterialCommunityIcons name="chat" size={24} color="#f63757" />
@@ -246,6 +248,20 @@ function ChangePasswordNavigator() {
       <HomeStack.Screen
         name="ChangePassword"
         component={ChangePasswordScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+    </HomeStack.Navigator>
+  );
+}
+
+function HelpNavigator() {
+  return (
+    <HomeStack.Navigator>
+      <HomeStack.Screen
+        name="Help"
+        component={HelpScreen}
         options={{
           headerShown: false,
         }}

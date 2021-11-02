@@ -119,9 +119,10 @@ export default function AccountScreen({navigation}) {
 
     return (
         <SafeAreaView style={{ backgroundColor: '#f9e8ef', flex: 1 }}>
-            <View>
-                <Header />
-            </View>
+           <View  style={Platform.OS === 'android' ? {marginTop:30}: {marginTop:0}}>
+        <Header />
+      </View>
+
 
             <KeyboardAwareScrollView style={{ marginTop: 40, flex: 1 }}>
                 <View style={{ alignSelf: 'center', }}>

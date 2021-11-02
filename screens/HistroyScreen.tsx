@@ -5,6 +5,7 @@ import {
   Dimensions,
   SafeAreaView,
   Text,
+  Platform
 } from "react-native";
 import {
   TabView,
@@ -104,9 +105,10 @@ export default function RateCalculatorScreen() {
 
   return (
     <SafeAreaView style={{ backgroundColor: "#f9e8ef", flex: 1 }}>
-      <View>
+      <View  style={Platform.OS === 'android' ? {marginTop:30}: {marginTop:0}}>
         <Header />
       </View>
+
 
       <View style={{ alignSelf: "center", marginTop: 20 }}>
         <Title name={"Transaction Histroy"} />

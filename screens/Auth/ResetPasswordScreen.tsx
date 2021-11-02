@@ -12,13 +12,13 @@ interface actionContext {
 }
 
 const ResetPasswordScreen = ({navigation}) => {
-    const [phone, setPhone] = React.useState('')
+    const [email, setEmail] = React.useState('')
     const [loading, setLoading] = React.useState(false)
     const { state, forget, clearMessage } = React.useContext<actionContext>(AuthContext)
 
     React.useEffect(() => {
         const clearError = navigation.addListener('blur', () => {
-            setPhone('')
+            setEmail('')
             clearMessage()
         });
         return clearError;
@@ -27,7 +27,7 @@ const ResetPasswordScreen = ({navigation}) => {
     const doReset = async () => {
         state.errorMessage = ''
         setLoading(true)
-        await forget(phone, () => {
+        await forget(email, () => {
             navigation.navigate('Verify',{ItemId: 1});
         })
         setLoading(false)
@@ -35,7 +35,7 @@ const ResetPasswordScreen = ({navigation}) => {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
-                <View style={{ flexDirection: 'row', marginTop: 5 }}>
+                <View style={{ flexDirection: 'row', marginTop: 30 }}>
                     <Element.Icon
                         type='material'
                         name='arrow-back'
@@ -84,19 +84,19 @@ const ResetPasswordScreen = ({navigation}) => {
                         leftIcon={
                             <Element.Icon
                                 type='material-icon'
-                                name='phone'
+                                name='email'
                                 size={24}
-                                color={phone.length > 10 ? 'red' : 'black'}
+                                
                             />
                         }
-                        maxLength={13}
+            
                         errorStyle={{ color: '#f63757' }}
-                        placeholder='Enter your phone number'
+                        placeholder='Enter your email address'
                         errorMessage={state.errorMessage.verification_code ? state.errorMessage.verification_code : state.errorMessage}
-                        value={phone}
-                        onChangeText={setPhone}
+                        value={email}
+                        onChangeText={setEmail}
                         autoCapitalize='none'
-                        keyboardType='phone-pad'
+                        keyboardType='email-address'
                         autoCorrect={false}
                     />
                     <Element.Button

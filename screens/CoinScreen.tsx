@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet, SafeAreaView } from "react-native";
+import { StyleSheet, SafeAreaView, Platform } from "react-native";
 import { View, Clipboard } from "react-native";
 import * as Element from "react-native-elements";
 import Picker from "../components/Picker";
@@ -133,7 +133,7 @@ export default function CoinScreen({ navigation, route }) {
 
   return (
     <SafeAreaView style={{ backgroundColor: "#f9e8ef", flex: 1 }}>
-      <View>
+     <View style={Platform.OS === 'android' ? {marginTop:30}: {marginTop:0}}>
         <Header />
       </View>
 

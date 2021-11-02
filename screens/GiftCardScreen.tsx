@@ -141,7 +141,7 @@ export default function GiftCardScreen({ route, navigation }) {
 
   return (
     <SafeAreaView style={{ backgroundColor: '#f9e8ef', flex: 1 }}>
-      <View>
+      <View  style={Platform.OS === 'android' ? {marginTop:30}: {marginTop:0}}>
         <Header />
       </View>
 
@@ -220,7 +220,7 @@ export default function GiftCardScreen({ route, navigation }) {
           <Element.Button
             title="Upload Giftcard's*"
             titleStyle={{ alignSelf: 'flex-end', color: 'black' }}
-            buttonStyle={{ borderRadius: 40, borderColor: 'red', }}
+            buttonStyle={{ borderRadius: 18, borderColor: 'red', }}
             containerStyle={{ margin: 20, height: 40, borderColor: 'red' }}
             onPress={pickImage}
             type="outline"

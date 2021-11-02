@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, StyleSheet, Dimensions, StatusBar, ScrollView, SafeAreaView } from 'react-native';
+import { View, StyleSheet, Dimensions, StatusBar, ScrollView, SafeAreaView, Platform } from 'react-native';
 import { TabView, SceneMap, TabBar, Route, SceneRendererProps, TabBarIndicatorProps, TabBarProps } from 'react-native-tab-view';
 import CryptoRate from '../components/CryptoRate'
 import GiftRate from '../components/GiftRate'
@@ -32,9 +32,10 @@ export default function RateCalculatorScreen() {
 
   return (
     <SafeAreaView style={{backgroundColor:'#f9e8ef', flex: 1}}>
-      <View>
-            <Header/>
+      <View  style={Platform.OS === 'android' ? {marginTop:30}: {marginTop:0}}>
+        <Header />
       </View>
+
      
       <View style={{alignSelf:'center', marginTop: 20}}>
             <Title name={'Rate Calculator'} />
